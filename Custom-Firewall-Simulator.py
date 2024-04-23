@@ -1,4 +1,7 @@
 import random
+import logging
+
+logging.basicConfig(level=logging.CRITICAL)  # Log seviyesini ayarla
 
 def generate_custom_ip():
     """Generate a custom IP address."""
@@ -29,5 +32,16 @@ def simulate_network_traffic():
         random_number = random.randint(0, 9999)
         print(f"IP: {ip_address}, Action: {action}, Random: {random_number}")
 
+# Global düzeyde custom_rules değişkeni tanımla
+custom_rules = {}
+
+def add_custom_rule():
+    global custom_rules
+    ip_address = input("Enter IP address: ")
+    action = input("Enter action (block/allow): ")
+    custom_rules[ip_address] = action
+    logging.info(f"Custom rule added: IP {ip_address} will be {action}ed")
+
 if __name__ == "__main__":
     simulate_network_traffic()
+    add_custom_rule()
